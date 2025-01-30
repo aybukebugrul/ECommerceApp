@@ -1,0 +1,40 @@
+@page
+@model WebApp.Pages.StockPageModel
+@{
+    ViewData["Title"] = "Stock by Category";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="/css/stock.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Stock by Category</h1>
+
+        <div class="stock-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Total Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var categoryStock in Model.CategoryStocks)
+                    {
+                        <tr>
+                            <td>@categoryStock.Category</td>
+                            <td>@categoryStock.TotalStock</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

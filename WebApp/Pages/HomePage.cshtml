@@ -1,0 +1,97 @@
+@page
+@model WebApp.Pages.HomePageModel
+@{
+    ViewData["Title"] = "E-Commerce Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="/css/homepage.css">
+    <script>
+        function toggleForm() {
+            const form = document.getElementById('addProductForm');
+            form.classList.toggle('visible');
+        }
+
+        function addToFavorites(productName,productPrice,productImageUrl) {
+           fetch('/HomePage.cshtml.cs', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            Name: productName,
+            Price: productPrice,
+            ImageUrl: productImageUrl
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Product added to favorites!');
+        } else {
+            alert('Failed to add product to favorites.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+        }
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <!-- Ürün Arama ve Filtreleme -->
+        <div class="filter-bar">
+            <form method="get" class="filter-form">
+                <input type="text" name="searchName" placeholder="Search by name..." value="@Model.SearchName" />
+                <input type="number" name="minPrice" placeholder="Min price" value="@Model.MinPrice" />
+                <input type="number" name="maxPrice" placeholder="Max price" value="@Model.MaxPrice" />
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </form>
+        </div>
+
+        <!-- Ürünler -->
+        <div class="products-container">
+            @foreach (var product in Model.FilteredProducts)
+            {
+                <div class="product">
+                    <img src="@product.ImageUrl" alt="@product.Name">
+                    <h3>@product.Name</h3>
+                    <p>$@product.Price</p>
+                    <div class="product-buttons">
+                        <form method="post" asp-page-handler="AddToCart" style="display: inline;">
+                            <input type="hidden" name="productName" value="@product.Name" />
+                            <input type="hidden" name="productPrice" value="@product.Price" />
+                            <input type="hidden" name="productImageUrl" value="@product.ImageUrl" />
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                         <form method="post" asp-page-handler="AddFavorite" style="display: inline;">
+                            <input type="hidden" name="productName" value="@product.Name" />
+                            <input type="hidden" name="productPrice" value="@product.Price" />
+                            <input type="hidden" name="productImageUrl" value="@product.ImageUrl" />
+                        <button class="favorite-button">&hearts;</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Yeni Ürün Ekleme 
+        <div class="add-product">
+            <button onclick="toggleForm()">+</button>
+            <form method="post" asp-page-handler="AddProduct" id="addProductForm">
+                <input type="text" name="NewProductName" placeholder="Product Name" required />
+                <input type="number" name="NewProductPrice" placeholder="Price" required />
+                <input type="text" name="NewProductImageUrl" placeholder="Image URL" required />
+                <button type="submit">Add Product</button>
+            </form>
+        </div> -->
+    </main>
+</body>
+</html>

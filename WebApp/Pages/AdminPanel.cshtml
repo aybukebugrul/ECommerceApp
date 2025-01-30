@@ -1,0 +1,84 @@
+@page
+@model WebApp.Pages.AdminPanelModel
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+
+        <div class="section">
+            <h2>Ürün Listesi</h2>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Fiyat</th>
+                        <th>Kategori</th>
+                        <th>Stok</th>
+                        <th>Görsel URL</th>
+                        <th>İşlem</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.Productsion)
+                    { 
+                        <tr>
+                            <td>@product.Name</td>
+                            <td>@product.Price</td>
+                            <td>@product.Category</td>
+                            <td>@product.Stock</td>
+                            <td><a href="@product.ImageUrl" target="_blank">Görsele Git</a></td>
+                            <td>
+                                <form method="post" asp-page-handler="Delete">
+                                    <input type="hidden" name="name" value="@product.Name" />
+                                    <button type="submit" class="btn btn-danger">Sil</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Yeni Ürün Ekle</h2>
+            <form method="post" asp-page-handler="Add" class="form">
+                <div class="form-group">
+                    <label for="name">Ad</label>
+                    <input type="text" id="name" name="name" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="price">Fiyat</label>
+                    <input type="number" id="price" name="price" step="0.01" class="form-control" required />
+                </div>
+                      <div class="form-group">
+                    <label for="Category">Kategori</label>
+                    <input type="text" id="Category" name="Category" class="form-control" required />
+                </div>
+                
+                      <div class="form-group">
+                    <label for="Stock">Stok</label>
+                    <input type="text" id="Stock" name="Stock"  step="1" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="imageUrl">Görsel URL</label>
+                    <input type="text" id="imageUrl" name="imageUrl" class="form-control" required />
+                </div>
+             
+                <button type="submit" class="btn btn-primary">Ekle</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

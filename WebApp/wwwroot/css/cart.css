@@ -1,0 +1,90 @@
+/* Genel Ayarlar */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Ayarları */
+header {
+    background-color: #21374f;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+* Navigation Bar */
+.navigation-bar {
+    display: flex;
+    gap: 30px; /* Linkler arasındaki boşluk */
+    justify-content: center; /* Ortala */
+    align-items: center; /* Dikeyde ortala */
+    flex: 1;
+}
+
+.navigation-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 60px;
+    padding: 5px 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navigation-bar a:hover {
+    text-decoration: underline;
+    background-color: #2c5d8f;
+    border-radius: 5px;
+}
+
+/* Header Sol Kısmı (Başlık) */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Navigation Bar */
+.navigation-bar {
+    display: flex;
+    gap: 30px; /* Linkler arasındaki boşluk */
+    justify-content: center; /* Ortala */
+    align-items: center; /* Dikeyde ortala */
+    flex: 1;
+}
+
+.navigation-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 60px;
+    padding: 5px 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navigation-bar a:hover {
+    text-decoration: none;
+    background-color: #2c5d8f;
+    border-radius: 5px;
+}
+
+/* Sağ Kısımda Fazla Alanı Doldur */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}

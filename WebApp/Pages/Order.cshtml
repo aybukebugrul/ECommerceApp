@@ -1,0 +1,70 @@
+@page "/Order"
+@model WebApp.Pages.OrderModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<form method="post" style="position: relative; z-index: 2; margin-top: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
+    <div class="form-group">
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" class="form-control dynamic-input" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" class="form-control dynamic-input" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" class="form-control dynamic-input" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="City">City</label>
+        <input asp-for="City" class="form-control dynamic-input" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PostalCode">Postal Code</label>
+        <input asp-for="PostalCode" class="form-control dynamic-input" />
+        <span asp-validation-for="PostalCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaymentMethod">Payment Method</label>
+        <select asp-for="PaymentMethod" class="form-control dynamic-select" style="width: 200px;">
+            <option value="">Select</option>
+            <option value="CreditCard">Credit Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="BankTransfer">Bank Transfer</option>
+        </select>
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="display: block; margin: 20px auto;">Place Order</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelectorAll('.dynamic-input').forEach(input => {
+            input.style.transition = 'width 0.3s';
+            input.style.width = '200px';
+
+            input.addEventListener('focus', () => {
+                input.style.width = '400px';
+            });
+
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.style.width = '200px';
+                }
+            });
+        });
+    </script>
+}

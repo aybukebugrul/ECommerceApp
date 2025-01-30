@@ -1,0 +1,45 @@
+
+@page
+@model WebApp.Pages.FavoriteModel
+
+@{
+    ViewBag.Title = "Favorite Products";
+}
+
+<h1>My Favorite Products</h1>
+<div id="favorites-container">
+    @if (Model.Favorites != null && Model.Favorites.Count > 0)
+    {
+        <ul>
+            @foreach (var product in Model.Favorites)
+            {
+                <li>
+                    <div class="product">
+                         <form method="post" asp-page-handler="Remove" style="display: inline;">
+                                 <input type="hidden" name="productName" value="@product.Name" />
+                        <h3>@product.Name</h3>
+                        <p>@product.Description</p>
+                        <span>@product.Price $</span>
+                        <button class="remove-favorite" data-id="@product.Name" asp-page-handler="Remove">Remove</button>
+                        </form>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>You have no favorite products yet.</p>
+    }
+</div>
+
+<script>
+    // Remove product from favorites (AJAX example)
+    document.querySelectorAll(".remove-favorite").forEach(button => {
+        button.addEventListener("click", function () {
+            const productId = this.getAttribute("data-id");
+            // Add your AJAX call to remove the product from favorites
+            alert(`Remove favorite product with ID: ${productId}`);
+        });
+    });
+</script>

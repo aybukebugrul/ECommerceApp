@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Login Page";
+}
+<head>
+    <link rel="stylesheet" href="/css/index.css" />
+</head>
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        alert('@TempData["ErrorMessage"]');
+    </script>
+}
+<style>
+    header{display: none;}
+</style>
+<div class="login-container">
+    <div class="image-container">
+        <img src="~/images/photo1.jpeg" alt="Image 1" class="image-slide">
+        <img src="~/images/photo2.jpeg" alt="Image 2" class="image-slide">
+        <img src="~/images/photo3.jpeg" alt="Image 3" class="image-slide">
+        <img src="~/images/photo4.jpeg" alt="Image 4" class="image-slide">
+        <img src="~/images/photo5.jpeg" alt="Image 5" class="image-slide">
+        <img src="~/images/photo6.jpeg" alt="Image 6" class="image-slide">
+        <img src="~/images/photo7.jpeg" alt="Image 7" class="image-slide">
+        <img src="~/images/photo8.jpeg" alt="Image 8" class="image-slide">
+        <img src="~/images/photo9.jpeg" alt="Image 9" class="image-slide">
+    </div>
+    <div class="login-box" style="">
+        <h1 class="login-title">Welcome Back!</h1>
+        <p>Please login to your account.</p>
+        <form id="loginForm"  asp-page-handler="GetData" >
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <p class="register-link">Don't have an account? <a href="/Register">Register here</a></p>
+    </div>
+</div>
+
+<script src="login.js"></script>
+<script>
+    const images = document.querySelectorAll('.image-slide');
+    let currentIndex = 0;
+
+    function changeImage() {
+        images.forEach((img, index) => {
+            img.style.opacity = 0;
+            if (index === currentIndex) {
+                img.style.opacity = 1;
+            }
+        });
+
+        currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    setInterval(changeImage, 3000); // Change image every 3 seconds
+    changeImage(); // Initial call to display the first image
+</script>
+
+

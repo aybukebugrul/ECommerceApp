@@ -1,0 +1,56 @@
+@page
+@model WebApp.Pages.ReportsModel
+@{
+    ViewData["Title"] = "Raporlama";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Satış Raporlama</h1>
+
+        <div class="section">
+            <h2>Rapor Seçimi</h2>
+            <form method="get">
+                <label for="reportType">Rapor Türü:</label>
+                <select id="reportType" name="reportType" class="form-control">
+                    <option value="daily" selected>Günlük</option>
+                    <option value="monthly">Aylık</option>
+                    <option value="yearly">Yıllık</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Raporu Getir</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h2>Rapor Detayları</h>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Satış Fiyatı</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var report in Model.ReportsRapor)
+                    {
+                        <tr>
+                            <td>@report.Name</td>
+                            <td>@report.Price</td>
+                            <td>@report.LastUpdated</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

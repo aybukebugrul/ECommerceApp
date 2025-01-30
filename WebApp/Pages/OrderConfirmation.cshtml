@@ -1,0 +1,18 @@
+@page "/OrderConfirmation"
+@model WebApp.Pages.OrderConfirmationModel
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<head>
+    <link rel="stylesheet" href="/css/orderconfirmation.css" />
+</head>
+
+<div class="confirmation-container">
+    <h1>Thank You!</h1>
+    <p>Your order has been created successfully.</p>
+    <p><strong>Order Number:</strong> @Model.OrderId</p>
+    <p><strong>Order Date:</strong> @Model.OrderDate.ToString("MMMM dd, yyyy - HH:mm")</p>
+    <p>You will receive it as soon as possible.</p>
+    <a asp-page="/HomePage" class="btn btn-primary">Return to Home</a>
+</div>
